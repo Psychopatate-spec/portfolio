@@ -1,38 +1,80 @@
-.App {
+:root {
+  --main-color: #b3811d;
+  --secondary-color: #fdfbf7;
+}
+
+body {
+  font-family: "Schoolbell", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.flipbook-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.flipbook {
+  display: inline-block;            /* shrink-wrap the flipbook */
+  box-shadow: none;                 /* box-shadow removed so empty pages won't get it */
+  overflow: hidden;                 /* clip pages to rounded corners */
+  box-sizing: content-box;
+  border-radius: 10px;
+}
+
+.page {
+  width: 450px;   /* same as flipbook width */
+  height: 600px;  /* same as flipbook height */
+  background: var(--secondary-color); /* cozy paper background */
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);  /* shadow applied only to real pages */
+}
+.cover {
+  width: 450px;   /* same as flipbook width */
+  height: 600px;  /* same as flipbook height */
+  background: var(--main-color); /* cozy cover background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);  /* shadow applied only to covers */
 }
 
-.App-link {
-  color: #61dafb;
+/* Ensure empty pages occupy the same space but remain shadow-free and transparent */
+.empty-page {
+  width: 450px;
+  height: 600px;
+  background: white;
+  box-shadow: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.page-content {
+  margin: 20px;
+  text-align: center;
+  color: var(--main-color);
+  background: var(--secondary-color);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.profile {
+  width: 200px;
+  height: 200px;
+  border: 5px solid var(--main-color);
+  border-radius: 50%;
 }
