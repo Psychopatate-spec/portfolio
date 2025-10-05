@@ -1,16 +1,29 @@
 :root {
   --main-color: #b3811d;
   --secondary-color: #fdfbf7;
+  --paper: url('./assets/paper.png');
+  --cover: url('./assets/cover.png');
 }
 
 body {
   font-family: "Schoolbell", cursive;
   font-weight: 400;
   font-style: normal;
+  margin: 0;
+  padding: 0;
+  background-color: brown;
 }
 
 h1 {
   text-align: center;
+}
+
+p {
+  text-align: center;
+  margin: 10px;
+  padding: 0;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 ul {
@@ -37,6 +50,7 @@ ul {
   width: 450px;   /* same as flipbook width */
   height: 600px;  /* same as flipbook height */
   background: var(--secondary-color); /* cozy paper background */
+  background-image: var(--paper);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -47,6 +61,7 @@ ul {
   width: 450px;   /* same as flipbook width */
   height: 600px;  /* same as flipbook height */
   background: var(--main-color); /* cozy cover background */
+  background-image: var(--cover);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -62,14 +77,20 @@ ul {
   box-shadow: none;
 }
 
-.page-content {
+.page > .page-content {
   margin: 20px;
   text-align: center;
   color: var(--main-color);
-  background: var(--secondary-color);
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cover > .page-content {
+  margin: 20px;
+  text-align: center;
+  color: var(--secondary-color);
+  border-radius: 10px;
+  padding: 20px;
 }
 
 .profile {
@@ -77,4 +98,89 @@ ul {
   height: 200px;
   border: 5px solid var(--main-color);
   border-radius: 50%;
+}
+
+.project-image {
+  width: 100px;
+  height: 100px;
+  border: none; /* removed inner white border so outer card border is visible */
+  border-radius: 4px;
+  transition: transform 0.3s ease-in-out;
+  /* removed image rotation baseline so the whole card handles rotation */
+}
+
+/* target each project by its parent .project index — rotate the whole card (anchor) */
+.project-grid .project:nth-child(1) a { transform: rotate(-8deg); }
+.project-grid .project:nth-child(2) a { transform: rotate(4deg); }
+.project-grid .project:nth-child(3) a { transform: rotate(-5deg); }
+
+/* moved hover to the anchor so the whole card (image + text) gets the effect */
+.project-grid .project a {
+  display: inline-block;
+  padding: 12px;
+  background: var(--secondary-color);
+  border: 3px solid var(--main-color);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--main-color);
+  width: 120px; /* changed from fit-content to a consistent width */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+  /* initial transform may be set by nth-child rules above */
+}
+
+/* hover the whole card — reset rotation and lift/scale the whole anchor */
+.project-grid .project a:hover {
+  transform: rotate(0deg) translateY(-6px);
+  z-index: 10;
+  box-shadow: 8px 8px 18px rgba(0,0,0,0.25);
+}
+
+/* ensure link text under image looks good */
+.project-grid .project a h3 {
+  margin: 8px 0 0;
+  color: var(--main-color);
+  font-size: 1rem;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+a {
+  color: var(--main-color);
+  text-decoration: none;
+}
+
+.project-grid {
+  /* make the projects line up in a nice grid */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* three columns that share space */
+  gap: 18px;
+  justify-items: center; /* center each project cell */
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ensure each project container centers its anchor (useful for rotation effects) */
+.project-grid .project {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+/* responsive: stack projects into one column on narrow flipbook/pages */
+@media (max-width: 480px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .project-grid .project a {
+    width: 80%; /* allow cards to take most of the available width on small screens */
+  }
 }
