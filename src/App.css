@@ -1,35 +1,57 @@
 :root {
-  --main-color: #b3811d;
-  --secondary-color: #fdfbf7;
+  --main-color: #3A693B;
+  --secondary-color: #F4EBD0;
+  --tierce-color: #B8C8A2;
   --paper: url('./assets/paper.png');
   --cover: url('./assets/cover.png');
+  --cover-simple: url('./assets/cover-simple.png');
 }
 
 body {
-  font-family: "Schoolbell", cursive;
-  font-weight: 400;
+  font-family: "Swanky and Moo Moo", cursive;
+  font-weight: 700;
   font-style: normal;
   margin: 0;
   padding: 0;
-  background-color: brown;
+  background: radial-gradient(circle at center, var(--secondary-color) 30%, #B8C8A2 100%);
 }
 
 h1 {
   text-align: center;
+}
+#title {
+  margin: 10px;
+  padding: 0;
+  font-size: 3em;
+  color: var(--tierce-color);
 }
 
 p {
   text-align: center;
   margin: 10px;
   padding: 0;
-  font-size: 1.5em;
-  font-weight: bold;
+  font-size: 1.2em;
 }
 
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+i {
+  color: var(--main-color);
+  font-size: 2em;
+}
+
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 .flipbook-container {
@@ -47,34 +69,30 @@ ul {
 }
 
 .page {
-  width: 450px;   /* same as flipbook width */
-  height: 600px;  /* same as flipbook height */
+  width: 400px;   /* same as flipbook width */
+  height: 550px;  /* same as flipbook height */
   background: var(--secondary-color); /* cozy paper background */
   background-image: var(--paper);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);  /* shadow applied only to real pages */
 }
 .cover {
-  width: 450px;   /* same as flipbook width */
-  height: 600px;  /* same as flipbook height */
+  width: 400px;   /* same as flipbook width */
+  height: 550px;  /* same as flipbook height */
   background: var(--main-color); /* cozy cover background */
-  background-image: var(--cover);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);  /* shadow applied only to covers */
 }
-
-/* Ensure empty pages occupy the same space but remain shadow-free and transparent */
-.empty-page {
-  width: 450px;
-  height: 600px;
-  background: white;
-  box-shadow: none;
+.cover.moss {
+  background-image: var(--cover);
+}
+.cover.simple {
+  background-image: var(--cover-simple);
 }
 
 .page > .page-content {
@@ -112,7 +130,7 @@ ul {
 /* target each project by its parent .project index — rotate the whole card (anchor) */
 .project-grid .project:nth-child(1) a { transform: rotate(-8deg); }
 .project-grid .project:nth-child(2) a { transform: rotate(4deg); }
-.project-grid .project:nth-child(3) a { transform: rotate(-5deg); }
+.project-grid .project:nth-child(3) a { transform: rotate(5deg); }
 
 /* moved hover to the anchor so the whole card (image + text) gets the effect */
 .project-grid .project a {
@@ -141,6 +159,16 @@ ul {
   margin: 8px 0 0;
   color: var(--main-color);
   font-size: 1rem;
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* three columns that share space */
+  gap: 18px;
+  justify-items: center; /* center each skill cell */
+  align-items: start;
+  width: 100%;
+  box-sizing: border-box; 
 }
 
 .contact-list {
@@ -183,4 +211,155 @@ a {
   .project-grid .project a {
     width: 80%; /* allow cards to take most of the available width on small screens */
   }
+}
+
+.playlist-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  justify-items: center;
+  align-items: start;
+  margin-top: 8px;
+}
+
+.playlist {
+  width: 140px;
+  background: var(--secondary-color);
+  border: 3px solid var(--main-color);
+  border-radius: 8px;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  color: var(--main-color);
+}
+
+.album-cover {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid var(--main-color);
+  margin-bottom: 6px;
+}
+
+.audio-hidden {
+  display: none;
+}
+
+.compact-controls button {
+  padding: 4px 6px;
+  font-size: 0.8rem;
+}
+
+.playlist .album-cover { margin-bottom: 6px; }
+
+.playlist h3 { 
+  font-size: 0.8rem; 
+  margin: 0 0 6px;
+  white-space: nowrap;      /* keep text on one line */
+  overflow: hidden;         /* clip overflow */
+  text-overflow: ellipsis;  /* show ... when too long */
+  max-width: 100%;
+}
+
+.audio-player {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.playlist-controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.playlist-controls button {
+  background: var(--main-color);
+  color: var(--secondary-color);
+  border: none;
+  padding: 5px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.progress-container {
+  margin-top: 8px;
+  width: 100%;
+}
+
+.progress-range {
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 6px;
+  outline: none;
+}
+
+.progress-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--main-color);
+  border-radius: 50%;
+}
+
+.time-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: rgba(0,0,0,0.6);
+  margin-top: 4px;
+}
+
+.next-track {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--main-color);
+  font-weight: 600;
+}
+
+.track-list {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+}
+
+.track {
+  display: block; /* ensure ellipsis works reliably */
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;      /* keep text on one line */
+  overflow: hidden;        /* clip overflow */
+  text-overflow: ellipsis; /* show ... when too long */
+  max-width: 100%;
+}
+
+.track.active {
+  background: rgba(179,129,29,0.12);
+  border: 1px solid rgba(179,129,29,0.18);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* specific: reduce vertical margin for the Playlists title */
+#playlist-section .page-content h1 {
+  margin: 6px 0;
+}
+
+.sticker {
+  position: absolute;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* responsive */
+@media (max-width: 420px) {
+  .playlist-grid { grid-template-columns: 1fr; }
+  .playlist { width: 90%; }
 }
